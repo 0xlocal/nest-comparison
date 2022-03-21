@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: nest-fastify
+    # image: nest-fastify:1.0.0
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - '3001:3001'
+      - '9230:9230' # default debugging port on nodejs
+    command: yarn run start:debug
